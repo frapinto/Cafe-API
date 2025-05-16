@@ -27,15 +27,12 @@
 
 <script>
 function showCafeDetails(cafeId, mapUrl) {
-  // Hide default message
   document.getElementById('defaultMsg').style.display = 'none';
 
-  // Show and update map iframe
   const mapFrame = document.getElementById('cafeMap');
   mapFrame.style.display = 'block';
   mapFrame.src = mapUrl;
 
-  // Optional: Highlight selected cafe
   document.querySelectorAll('.cafe-item').forEach(item => {
     item.style.backgroundColor = item.dataset.id == cafeId ? '#f0f0f0' : 'transparent';
   });
