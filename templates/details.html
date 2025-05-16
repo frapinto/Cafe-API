@@ -1,0 +1,27 @@
+{% block content %}
+{% include "base.html" %}
+
+<body>
+  <div class="cafe-details-container">
+    <div class="cafe-details">
+      <h2>{{ cafe.name }}</h2>
+      <img src="{{ cafe.img_url }}" class="cafe-img" alt="{{ cafe.name }}">
+      <p><strong>Location:</strong> {{ cafe.location }}</p>
+      <p><strong>Seats:</strong> {{ cafe.seats }}</p>
+      <p><strong>Coffee Price:</strong> {{ cafe.coffee_price }}</p>
+      <p><strong>Features:</strong>
+        {% if cafe.has_sockets %} 🔌 Sockets {% endif %}
+        {% if cafe.has_wifi %} 📶 Wifi {% endif %}
+        {% if cafe.has_toilet %} 🚻 Toilet {% endif %}
+        {% if cafe.can_take_calls %} 📞 Calls {% endif %}
+      </p>
+      <div class="details-links">
+        <a href="{{ cafe.map_url }}" target="_blank" class="button">View on Map</a>
+        <a href="{{ url_for('home') }}" class="button">Back to List</a>
+        <a href="{{ url_for('delete', id=cafe.id) }}" class="button delete-button">Delete</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

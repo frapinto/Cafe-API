@@ -1,0 +1,54 @@
+{% block content %}
+{% include "base.html" %}
+
+<body>
+  <div class="app-container">
+
+
+
+      <div id="cafeList">
+        {% for cafe in cafes %}
+        <div class="cafe-item" onclick="showCafeDetails({{ cafe.id }}, '{{ cafe.map_url }}')">
+          <img src="{{ cafe.img_url }}" class="cafe-img" alt="{{ cafe.name }}">
+          <div class="cafe-info">
+            <h5>{{ cafe.name }}</h5>
+            <p>{{ cafe.location }}</p>
+            <p>{{ cafe.coffee_price }}</p>
+            <a href="{{ url_for('details', id=cafe.id) }}" class="button">  Details</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+
+
+
+</div>
+
+<script>
+function showCafeDetails(cafeId, mapUrl) {
+  // Hide default message
+  document.getElementById('defaultMsg').style.display = 'none';
+
+  // Show and update map iframe
+  const mapFrame = document.getElementById('cafeMap');
+  mapFrame.style.display = 'block';
+  mapFrame.src = mapUrl;
+
+  // Optional: Highlight selected cafe
+  document.querySelectorAll('.cafe-item').forEach(item => {
+    item.style.backgroundColor = item.dataset.id == cafeId ? '#f0f0f0' : 'transparent';
+  });
+}
+</script>
+
+<style>
+.app-container { display: flex; height: 100vh; }
+.main-content { flex: 1; padding: 20px; }
+.cafe-item { display: flex; padding: 10px; cursor: pointer; }
+.cafe-item:hover { background: #f5f5f5; }
+.cafe-info {display: flex; align-items:flex-start}
+.cafe-img { width: 80px; height: 80px; object-fit: cover; margin-right: 10px; }
+</style>
+
+{% endblock %}
